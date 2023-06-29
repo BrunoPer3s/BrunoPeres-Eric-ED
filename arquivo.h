@@ -4,6 +4,6 @@
 typedef struct listaCDescritor ListaCDescritor;
 
 void leArquivo(ListaCDescritor *l, int *id);
-void salvaArquivo(ListaCDescritor *l);
+void salvaArquivo(ListaCDescritor *l, int *id);
 
 #endif

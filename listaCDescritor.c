@@ -41,18 +41,16 @@ int verificaSeIdExiste(ListaCDescritor *l, int idInput)
 
 void insereOrdenado(ListaCDescritor *l, Filme *f, int *id)
 {
-
   NoFilme *novoFilme = (NoFilme *)malloc(sizeof(NoFilme));
-
   f->id = *id;
   (*id)++;
+  
   novoFilme->info = *f;
 
   printf("ID: %d - %s\n\n", f->id, f->nome);
 
   if (estaVazia(l))
   {
-
     novoFilme->info = *f;
 
     novoFilme->prox = NULL;

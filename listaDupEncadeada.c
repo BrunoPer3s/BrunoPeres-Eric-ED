@@ -17,8 +17,7 @@ void insereSequencia(ListaCDescritor *l, int idInput, Filme *f, int *id)
   {
     NoFilme *p;
 
-    for (p = l->prim; (p != NULL) && (p->info.id != idInput); p = p->prox)
-      ;
+    for (p = l->prim; (p != NULL) && (p->info.id != idInput); p = p->prox);
 
     if (p == NULL)
     {
@@ -48,14 +47,14 @@ void insereSequencia(ListaCDescritor *l, int idInput, Filme *f, int *id)
       {
         ListaDupEncadeada *p_seq;
 
-        for (p_seq = p->info.seq; p_seq->prox != NULL; p_seq = p_seq->prox)
-          ;
+        for (p_seq = p->info.seq; p_seq->prox != NULL; p_seq = p_seq->prox);
 
         p_seq->prox = seq;
         seq->ant = p_seq;
       }
     }
     l->n++;
+    //(*id)++;
   }
   else
   {

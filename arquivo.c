@@ -40,9 +40,29 @@ void leArquivo(ListaCDescritor *l, int *id)
     }
     fclose(arq);
   }
+  int MaiorId = 0;
+
+  NoFilme *f = l->prim;
+  while(f != NULL) {
+    ListaDupEncadeada *fSeq = f->info.seq;
+    while (fSeq != NULL) {
+      if (fSeq->info.id > MaiorId)
+      {
+        MaiorId = fSeq->info.id;
+      }
+      fSeq = fSeq->prox;
+    }
+    if (f->info.id > MaiorId)
+    {
+      MaiorId = f->info.id;
+    }
+    f = f->prox;
+  }
+  MaiorId++;
+  (*id) = MaiorId;
 }
 
-void salvaArquivo(ListaCDescritor *l)
+void salvaArquivo(ListaCDescritor *l, int *id)
 {
   FILE *arq;
   arq = fopen("banco.txt", "w");
@@ -54,6 +74,7 @@ void salvaArquivo(ListaCDescritor *l)
   else
   {
     NoFilme *f = l->prim;
+    int MaiorId = 0;
 
     while (f != NULL)
     {
@@ -62,11 +83,17 @@ void salvaArquivo(ListaCDescritor *l)
       while (fSeq != NULL)
       {
         fprintf(arq, "|%d|%d|%s\n", fSeq->info.id, fSeq->info.ano, fSeq->info.nome);
+        if(fSeq->info.id > MaiorId) {
+          MaiorId = fSeq->info.id;
+        }
         fSeq = fSeq->prox;
+      }
+      if(f->info.id > MaiorId) {
+        MaiorId = f->info.id;
       }
       f = f->prox;
     }
+  *id = MaiorId;
   }
-
   fclose(arq);
 }

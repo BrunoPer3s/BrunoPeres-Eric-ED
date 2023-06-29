@@ -15,6 +15,7 @@ int main()
   Filme *filme;
   criarLista(&lista);
   leArquivo(&lista, &id);
+  printf("ID Inicio%d", id);
 
   do
   {
@@ -112,7 +113,7 @@ int main()
 
     case 10:
       printf("Encerrando programa e salvando dados\n");
-      salvaArquivo(&lista);
+      salvaArquivo(&lista, &id);
       break;
 
     default:
