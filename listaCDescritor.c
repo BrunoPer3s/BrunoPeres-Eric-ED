@@ -108,18 +108,54 @@ void alterarDados(ListaCDescritor *l, int idInput, int *id)
   if (!estaVazia(l))
   {
     NoFilme *p, *ant = NULL;
-    (*id)++;
+    p = l->prim;
+    ListaDupEncadeada *pSeq = NULL;
 
-    for (p = l->prim; (p != NULL) && (p->info.id != idInput); p = p->prox)
+    /* for (p = l->prim; (p != NULL) && (p->info.id != idInput); p = p->prox)
     {
-      ant = p;
-    }
+      pSeq = p->info.seq;
+      while (pSeq != NULL && pSeq->info.id != idInput)
+      {
+        printf("%s\n", pSeq->info.nome);
+        pSeq = pSeq->prox;
+      }
+    } */
+    while(p != NULL) {
+      if(p->info.id == idInput) {
+        Filme *f;
+        f = &(p->info);
 
-    if (p == NULL)
+        printf("\nO filme encontrado foi: ");
+        imprimeFilme(f);
+        printf("\n");
+        alterarNome(f);
+        alterarAno(f);
+        break;
+      }
+      pSeq = p->info.seq;
+      while(pSeq != NULL) {
+        if(pSeq->info.id == idInput) {
+          Filme *f;
+          f = &(pSeq->info);
+
+          printf("\nO filme encontrado foi: ");
+          imprimeFilme(f);
+          printf("\n");
+          alterarNome(f);
+          alterarAno(f);
+          break;
+        }
+      pSeq= pSeq->prox;
+      }
+      p = p->prox;
+    }
+    
+
+    /* if (p == NULL)
     {
       printf("\nId não encontrado\n");
-    }
-    else if (p->info.id == idInput)
+    } */
+    /* else if (p->info.id == idInput)
     {
       Filme *f;
       f = &(p->info);
@@ -127,22 +163,20 @@ void alterarDados(ListaCDescritor *l, int idInput, int *id)
       printf("\nO filme encontrado foi: ");
       imprimeFilme(f);
       printf("\n");
-
       alterarNome(f);
       alterarAno(f);
+    } */
+    /* else if (pSeq->info.id == idInput)
+    {
+      Filme *f;
+      f = &(pSeq->info);
 
-      if (ant == NULL)
-      {
-        l->prim = p->prox;
-      }
-      else
-      {
-        ant->prox = p->prox;
-      }
-
-      l->n--;
-      insereOrdenado(l, f, id);
-    }
+      printf("\nO filme encontrado foi: ");
+      imprimeFilme(f);
+      printf("\n");
+      alterarNome(f);
+      alterarAno(f);
+    } */
   }
   else
   {
