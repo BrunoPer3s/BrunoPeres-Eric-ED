@@ -5,32 +5,27 @@
 #include "filme.h"
 #include "listaDupEncadeada.h"
 
-typedef struct listaCDescritor
-{
+typedef struct listaCDescritor {
   int n;
   struct noFilme *prim, *ult;
 } ListaCDescritor;
 
-typedef struct noFilme
-{
+typedef struct noFilme {
   struct filme info;
   struct noFilme *prox;
 } NoFilme;
 
-void criarLista(ListaCDescritor *l)
-{
+void criarLista(ListaCDescritor *l) {
   l->n = 0;
   l->prim = NULL;
   l->ult = NULL;
 }
 
-int estaVazia(ListaCDescritor *l)
-{
+int estaVazia(ListaCDescritor *l) {
   return (l->n == 0);
 }
 
-int verificaSeIdExiste(ListaCDescritor *l, int idInput)
-{
+int verificaSeIdExiste(ListaCDescritor *l, int idInput) {
   NoFilme *p;
 
   for (p = l->prim; (p != NULL) && (p->info.id != idInput); p = p->prox)
@@ -39,18 +34,16 @@ int verificaSeIdExiste(ListaCDescritor *l, int idInput)
   return (p == NULL);
 }
 
-void insereOrdenado(ListaCDescritor *l, Filme *f, int *id)
-{
+void insereOrdenado(ListaCDescritor *l, Filme *f, int *id) {
   NoFilme *novoFilme = (NoFilme *)malloc(sizeof(NoFilme));
   f->id = *id;
   (*id)++;
-  
+
   novoFilme->info = *f;
 
   printf("ID: %d - %s\n\n", f->id, f->nome);
 
-  if (estaVazia(l))
-  {
+  if (estaVazia(l)) {
     novoFilme->info = *f;
 
     novoFilme->prox = NULL;
@@ -62,8 +55,7 @@ void insereOrdenado(ListaCDescritor *l, Filme *f, int *id)
     return;
   }
 
-  if (strcmp(novoFilme->info.nome, l->prim->info.nome) < 0)
-  {
+  if (strcmp(novoFilme->info.nome, l->prim->info.nome) < 0) {
 
     novoFilme->info = *f;
 
@@ -74,18 +66,15 @@ void insereOrdenado(ListaCDescritor *l, Filme *f, int *id)
     return;
   }
 
-  else
-  {
+  else {
     NoFilme *p = l->prim, *ant;
 
-    while (p != NULL && strcmp(novoFilme->info.nome, p->info.nome) >= 0)
-    {
+    while (p != NULL && strcmp(novoFilme->info.nome, p->info.nome) >= 0) {
       ant = p;
       p = p->prox;
     }
 
-    if (p == NULL)
-    {
+    if (p == NULL) {
       novoFilme->prox = NULL;
       ant->prox = novoFilme;
       l->ult = novoFilme;
@@ -94,8 +83,7 @@ void insereOrdenado(ListaCDescritor *l, Filme *f, int *id)
       return;
     }
 
-    else
-    {
+    else {
       novoFilme->prox = p;
       ant->prox = novoFilme;
       l->n++;
@@ -103,168 +91,104 @@ void insereOrdenado(ListaCDescritor *l, Filme *f, int *id)
   }
 }
 
-void alterarDados(ListaCDescritor *l, int idInput, int *id)
-{
-  if (!estaVazia(l))
-  {
+void alterarDados(ListaCDescritor *l, int idInput, int *id) {
+  if (!estaVazia(l)) {
     NoFilme *p, *ant = NULL;
     p = l->prim;
     ListaDupEncadeada *pSeq = NULL;
+    Filme *f = NULL;
 
-    /* for (p = l->prim; (p != NULL) && (p->info.id != idInput); p = p->prox)
-    {
-      pSeq = p->info.seq;
-      while (pSeq != NULL && pSeq->info.id != idInput)
-      {
-        printf("%s\n", pSeq->info.nome);
-        pSeq = pSeq->prox;
-      }
-    } */
-    while(p != NULL) {
-      if(p->info.id == idInput) {
-        Filme *f;
+    while (p != NULL) {
+      if (p->info.id == idInput) {
         f = &(p->info);
-
-        printf("\nO filme encontrado foi: ");
-        imprimeFilme(f);
-        printf("\n");
-        alterarNome(f);
-        alterarAno(f);
         break;
       }
       pSeq = p->info.seq;
-      while(pSeq != NULL) {
-        if(pSeq->info.id == idInput) {
-          Filme *f;
+      while (pSeq != NULL) {
+        if (pSeq->info.id == idInput) {
           f = &(pSeq->info);
-
-          printf("\nO filme encontrado foi: ");
-          imprimeFilme(f);
-          printf("\n");
-          alterarNome(f);
-          alterarAno(f);
           break;
         }
-      pSeq= pSeq->prox;
+        pSeq = pSeq->prox;
       }
       p = p->prox;
     }
-    
-
-    /* if (p == NULL)
-    {
-      printf("\nId não encontrado\n");
-    } */
-    /* else if (p->info.id == idInput)
-    {
-      Filme *f;
-      f = &(p->info);
-
+    if (f != NULL) {
       printf("\nO filme encontrado foi: ");
       imprimeFilme(f);
       printf("\n");
       alterarNome(f);
       alterarAno(f);
-    } */
-    /* else if (pSeq->info.id == idInput)
-    {
-      Filme *f;
-      f = &(pSeq->info);
-
-      printf("\nO filme encontrado foi: ");
-      imprimeFilme(f);
-      printf("\n");
-      alterarNome(f);
-      alterarAno(f);
-    } */
-  }
-  else
-  {
+    } else {
+      printf("Filme não encontrado!!!\n");
+    }
+  } else {
     printf("\nLista Vazia!\n");
   }
 }
 
-void imprimeLista(ListaCDescritor *l)
-{
+void imprimeLista(ListaCDescritor *l) {
 
   NoFilme *f;
   ListaDupEncadeada *lDup;
 
-  if (!estaVazia(l))
-  {
+  if (!estaVazia(l)) {
     printf("\n- Impressão da Lista -\n\n");
-    for (f = l->prim; f != NULL; f = f->prox)
-    {
+    for (f = l->prim; f != NULL; f = f->prox) {
       imprimeFilme(&(f->info));
 
-      for (lDup = f->info.seq; lDup != NULL; lDup = lDup->prox)
-      {
+      for (lDup = f->info.seq; lDup != NULL; lDup = lDup->prox) {
         printf("   --->   ");
         imprimeFilme(&(lDup->info));
       }
 
       printf("\n");
     }
-  }
-  else
-  {
+  } else {
     printf("\nLista Vazia!\n");
   }
 }
 
-void removerFilme(ListaCDescritor *l, int idInput)
-{
+void removerFilme(ListaCDescritor *l, int idInput) {
   NoFilme *ant = NULL;
   NoFilme *p;
 
-  for (p = l->prim; (p != NULL) && (p->info.id != idInput); p = p->prox)
-  {
+  for (p = l->prim; (p != NULL) && (p->info.id != idInput); p = p->prox) {
     ant = p;
   }
 
-  if (p == NULL)
-  {
+  if (p == NULL) {
     printf("\nElemento não encontrado!\n");
-  }
-  else
-  {
+  } else {
 
-    if (p->info.seq != NULL)
-    {
+    if (p->info.seq != NULL) {
       ListaDupEncadeada *p1_seq, *p2_seq;
 
-      for (p1_seq = p->info.seq; p2_seq != NULL; p1_seq = p2_seq)
-      {
+      for (p1_seq = p->info.seq; p2_seq != NULL; p1_seq = p2_seq) {
         p2_seq = p1_seq->prox;
         l->n--;
         free(p1_seq);
       }
-      //(*id)--;
     }
 
-    if (ant == NULL)
-    {
+    if (ant == NULL) {
       l->prim = p->prox;
 
-      if (l->prim == NULL)
-      {
+      if (l->prim == NULL) {
         l->ult = NULL;
       }
     }
 
-    else if (p->prox == NULL)
-    {
+    else if (p->prox == NULL) {
       ant->prox = NULL;
       l->ult = ant;
     }
 
-    else
-    {
+    else {
       ant->prox = p->prox;
     }
 
     free(p);
     l->n--;
-    //(*id)++;
   }
 }

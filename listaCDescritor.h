@@ -3,15 +3,13 @@
 
 typedef struct filme Filme;
 
-typedef struct listaCDescritor
-{
+typedef struct listaCDescritor {
   int n;
   struct noFilme *prim;
   struct noFilme *ult;
 } ListaCDescritor;
 
-typedef struct noFilme
-{
+typedef struct noFilme {
   struct filme info;
   struct noFilme *prox;
 } NoFilme;

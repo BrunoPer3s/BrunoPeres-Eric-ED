@@ -5,8 +5,7 @@
 #include "listaCDescritor.h"
 #include "listaDupEncadeada.h"
 
-int main()
-{
+int main() {
   int opcao = 0;
   int id = 1;
   int idInput, idInput2;
@@ -15,10 +14,8 @@ int main()
   Filme *filme;
   criarLista(&lista);
   leArquivo(&lista, &id);
-  printf("ID Inicio%d", id);
 
-  do
-  {
+  do {
     printf("\n\n**** Selecione uma opção ****\n\n");
 
     printf("1- Inserir um novo filme\n");
@@ -35,8 +32,7 @@ int main()
     printf("\nNúmero da opção: ");
     scanf("%d", &opcao);
 
-    switch (opcao)
-    {
+    switch (opcao) {
 
     case 1:
       filme = leFilme();
@@ -66,15 +62,12 @@ int main()
     case 5:
       printf("\nDigite o id do filme original: ");
       scanf("%d", &idInput);
-      if (!verificaSeIdExiste(&lista, idInput))
-      {
+      if (!verificaSeIdExiste(&lista, idInput)) {
         printf("\nInsira agora os dados da sequência\n");
         filme = leFilme();
         insereSequencia(&lista, idInput, filme, &id);
         break;
-      }
-      else
-      {
+      } else {
         printf("ID não encontrado!\n");
         break;
       }

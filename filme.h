@@ -5,8 +5,7 @@
 
 struct listaDupEncadeada;
 
-typedef struct filme
-{
+typedef struct filme {
   int id;
   int ano;
   char nome[MAX];
