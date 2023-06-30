@@ -6,20 +6,17 @@
 
 struct listaDupEncadeada;
 
-typedef struct filme
-{
+typedef struct filme {
   int id;
   int ano;
   char nome[MAX];
   struct listaDupEncadeada *seq;
 } Filme;
 
-Filme *leFilme()
-{
+Filme *leFilme() {
   Filme *filme = malloc(sizeof(Filme));
 
-  if (filme != NULL)
-  {
+  if (filme != NULL) {
     printf("\nCADASTRO DE FILME: \n\n");
 
     printf("Insira o nome do filme: ");
@@ -31,16 +28,13 @@ Filme *leFilme()
     filme->seq = NULL;
 
     return filme;
-  }
-  else
-  {
+  } else {
     printf("Erro de Alocação \n");
     exit(1);
   }
 }
 
-void alterarNome(Filme *f)
-{
+void alterarNome(Filme *f) {
   char novoNome[MAX];
   printf("\nInsira o novo nome: ");
   scanf(" %[^\n]", novoNome);
@@ -48,8 +42,7 @@ void alterarNome(Filme *f)
   strcpy((*f).nome, novoNome);
 }
 
-void alterarAno(Filme *f)
-{
+void alterarAno(Filme *f) {
   int novoAno;
   printf("Insira o novo ano: ");
   scanf(" %d", &novoAno);
@@ -57,19 +50,14 @@ void alterarAno(Filme *f)
   (*f).ano = novoAno;
 }
 
-int retornaAno(Filme *f)
-{
+int retornaAno(Filme *f) {
   return f->ano;
 }
 
-void imprimeFilme(Filme *f)
-{
-  if (f != NULL)
-  {
+void imprimeFilme(Filme *f) {
+  if (f != NULL) {
     printf("id: %d | %s | %d", f->id, f->nome, f->ano);
-  }
-  else
-  {
+  } else {
     printf("\nErro ao imprimir filme\n");
   }
 }

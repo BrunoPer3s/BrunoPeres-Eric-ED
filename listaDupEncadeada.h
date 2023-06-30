@@ -4,8 +4,7 @@
 typedef struct filme Filme;
 typedef struct listaCDescritor ListaCDescritor;
 
-typedef struct listaDupEncadeada
-{
+typedef struct listaDupEncadeada {
   struct filme info;
   struct listaDupEncadeada *prox;
   struct listaDupEncadeada *ant;
