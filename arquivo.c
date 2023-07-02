@@ -11,7 +11,7 @@ void leArquivo(ListaCDescritor *l, int *id) {
   Filme *filmeSeq = malloc(sizeof(Filme));
 
   FILE *arq;
-  arq = fopen("banco.txt", "r");
+  arq = fopen("bancoLinux.txt", "r");
 
   if (arq == NULL) {
     printf("Erro de alocacao ou Falha no arquivo \n");
