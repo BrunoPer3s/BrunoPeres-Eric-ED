@@ -55,7 +55,7 @@ void leArquivo(ListaCDescritor *l, int *id) {
 
 void salvaArquivo(ListaCDescritor *l, int *id) {
   FILE *arq;
-  arq = fopen("banco.txt", "w");
+  arq = fopen("bancoLinux.txt", "w");
 
   if (arq == NULL) {
     printf("Erro de alocacao ou Falha no arquivo \n");
