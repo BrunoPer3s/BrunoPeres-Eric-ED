@@ -20,11 +20,11 @@ void leArquivo(ListaCDescritor *l, int *id) {
     while (feof(arq) == 0) {
       fscanf(arq, "%c", &c);
       if (c == '|') {
-        fscanf(arq, "%d|%d|%[^\n]\n", &filmeSeq->id, &filmeSeq->ano, &filmeSeq->nome);
+        fscanf(arq, "%d|%d|%[^\n]\n", &filmeSeq->id, &filmeSeq->ano, filmeSeq->nome);
         *id = filmeSeq->id;
         insereSequencia(l, filme->id, filmeSeq, id);
       } else {
-        fscanf(arq, "\t%[^\t]\t%d\n", &filme->nome, &filme->ano);
+        fscanf(arq, "\t%[^\t]\t%d\n", filme->nome, &filme->ano);
         filme->id = c - '0';
         filme->seq = NULL;
         *id = filme->id;
