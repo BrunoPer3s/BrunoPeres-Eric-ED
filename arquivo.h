@@ -3,6 +3,7 @@
 
 typedef struct listaCDescritor ListaCDescritor;
 
+int tamArquivo(); 
 void leArquivo(ListaCDescritor *l, int *id);
 void salvaArquivo(ListaCDescritor *l, int *id);
 
